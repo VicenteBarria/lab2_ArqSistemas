@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+    db:
+        image: postgres
+        restart: always
+        volumes:
+            - ./sql:/var/lib/postgresql
+        ports:
+            - 5432:5432
+            
+    app:
+        #build: ./Gomitas
+        image: maven
+        restart: always
+        working_dir: /Gomitas
+        volumes:
+            - ./Gomitas:/Gomitas
+        ports:
+            - 8081:8081
+        command: ls -a
+        #links:
+        #    - db
