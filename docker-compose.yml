@@ -1,11 +1,16 @@
 version: '3'
 
+volumes:
+    sql/data:
+    Gomitas:
+
 services:
     db:
         image: postgres
         restart: always
         volumes:
             - ./sql:/var/lib/postgresql
+            - ./data:/var/lib/postgresql/data
         ports:
             - 5432:5432
             
