@@ -25,7 +25,7 @@ public class GomitasController {
 		this.repository = repository;
 	}
 	
-	@GetMapping("/gomitas")
+	/*@GetMapping("/gomitas")
 	public Resources<Resource<Gomitas>> allGomitas() {		//Lee todas las gomitas
 		List<Resource<Gomitas>> gomitas = repository.findAll().stream()
 				.map(gomita -> new Resource<>(gomita,
@@ -33,6 +33,11 @@ public class GomitasController {
 						linkTo(methodOn(GomitasController.class).allGomitas()).withRel("gomitas")))
 				.collect(Collectors.toList());
 		return new Resources<>(gomitas, linkTo(methodOn(GomitasController.class).allGomitas()).withSelfRel());
+	}*/
+	
+	@GetMapping("/gomitas")
+	public List<Gomitas> allGomitas() {
+		return repository.findAll();
 	}
 	
 	@PostMapping("/gomitas")
@@ -40,12 +45,17 @@ public class GomitasController {
 		return repository.save(newGomita);
 	}
 	
-	@GetMapping("/gomitas/{id}")
+	/*@GetMapping("/gomitas/{id}")
 	public Resource<Gomitas> oneGomita(@PathVariable Long id) {		//Lee una gomita
 		Gomitas gomita = repository.findById(id).orElseThrow(() -> new GomitasNotFoundException(id));
 		return new Resource<>(gomita,
 				linkTo(methodOn(GomitasController.class).oneGomita(id)).withSelfRel(),
 				linkTo(methodOn(GomitasController.class).allGomitas()).withRel("gomitas"));
+	}*/
+	
+	@GetMapping("/gomitas/{id}")
+	public Gomitas oneGomita(@PathVariable Long id) {
+		return repository.findById(id).orElseThrow(() -> new GomitasNotFoundException(id));
 	}
 
 	@PutMapping("/employees/{id}")
