@@ -3,23 +3,23 @@ version: '3'
 services:
     db:
         image: mysql
-        restart: always
+        #restart: always
         volumes:
             - ./sql:/var/lib/mysql
             #- ./sql/data:/var/lib/mysql/data
         environment:
-            POSTGRES_DATABASES: gomitasDB
-            POSTGRES_ROOT_PASSWORD: mysql
-            POSTGRES_USER: root
-            POSTGRES_PASSWORD: mysql
-            POSTGRES_MY_DATABASE: gomitasDB
-            POSTGRES_ROOT_HOST: '%'
+            MYSQL_DATABASES: gomitasDB
+            MYSQL_ROOT_PASSWORD: mysql
+            MYSQL_USER: root
+            MYSQL_PASSWORD: mysql
+            MYSQL_MY_DATABASE: gomitasDB
+            MYSQL_ROOT_HOST: '%'
         ports:
             - 3306:3306
             
     app:
         image: maven
-        restart: always
+        #restart: always
         working_dir: /Gomitas
         volumes:
             - ./Gomitas:/Gomitas
