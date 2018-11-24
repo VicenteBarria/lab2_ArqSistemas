@@ -1,12 +1,12 @@
 version: '3'
 
+volumes:
+sql: {}
+
 services:
     db:
         image: mysql
         #restart: always
-        volumes:
-            - ./sql:/var/lib/mysql
-            #- ./sql/data:/var/lib/mysql/data
         environment:
             MYSQL_DATABASES: gomitasDB
             MYSQL_ROOT_PASSWORD: mysql
@@ -16,6 +16,9 @@ services:
             MYSQL_ROOT_HOST: '%'
         ports:
             - 3306:3306
+        volumes:
+            - ./sql:/var/lib/mysql
+            - ./gomitas-schema.sql/:/docker-entrypoint-initdb.d/gomitas-schema.sql
             
     app:
         image: maven
