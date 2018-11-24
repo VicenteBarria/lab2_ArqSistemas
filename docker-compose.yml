@@ -6,12 +6,13 @@ services:
         restart: always
         volumes:
             - ./sql:/var/lib/postgresql
+            - ./sql/data:/var/lib/postgresql/data
         environment:
-            POSTGRES_DATABASES: gomitas
+            POSTGRES_DATABASES: gomitasDB
             POSTGRES_ROOT_PASSWORD: 1234
             POSTGRES_USER: admin
             POSTGRES_PASSWORD: 1234
-            POSTGRES_MY_DATABASE: gomitas
+            POSTGRES_MY_DATABASE: gomitasDB
             POSTGRES_ROOT_HOST: '%'
         ports:
             - 5432:5432
@@ -24,6 +25,6 @@ services:
             - ./Gomitas:/Gomitas
         ports:
             - 8081:8081
-        command: ls -a
+        command: mvn spring-boot:run
         links:
             - db
